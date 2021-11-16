@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import {
   addDummyGuestbookSignatures,
   addGuestbookSignature,
+  deleteGuestbookSignatureById,
   getAllGuestbookSignatures,
   getGuestbookSignatureById,
   GuestbookSignature,
@@ -57,7 +58,9 @@ app.get<{ id: string }>("/signatures/:id", (req, res) => {
 
 // DELETE /signatures/:id
 app.delete<{ id: string }>("/signatures/:id", (req, res) => {
-  const matchingSignature = getGuestbookSignatureById(parseInt(req.params.id));
+  const matchingSignature = deleteGuestbookSignatureById(
+    parseInt(req.params.id)
+  );
   if (matchingSignature === "not found") {
     res.status(404).json(matchingSignature);
   } else {
